@@ -41,17 +41,32 @@ bx, by = next state to compare tile
 // solved[TILE NUMBER][COORDINATE_VECTOR]
 int solved[NUM_TILES][XY] = {
 	{1,1}, // 0
-	{0,0}, // 1
-	{1,0}, // 2
+	{1,0}, // 1
+	{1,2}, // 2
 	{2,0}, // 3
 	{2,1},	// 4
 	{2,2}, // 5
-	{1,2},	// 6
-	{0,2},	// 7
-	{0,1}	// 8
+	{0,2},	// 6
+	{0,1},	// 7
+	{0,0}	// 8
 
 };
 
+
+/*
+int solved[NUM_TILES][XY] = {
+{1,1}, // 0
+{0,0}, // 1
+{1,0}, // 2
+{2,0}, // 3
+{2,1},	// 4
+{2,2}, // 5
+{1,2},	// 6
+{0,2},	// 7
+{0,1}	// 8
+
+};
+*/
 
 // valid moves calculate for current position of
 // blank tile
@@ -78,6 +93,9 @@ void solve_puzzle(Container this_container);
 
 void resolve_path_coordinates(int direction, int T, int &ax, int &ay, int &bx, int &by, Container this_container);
 
+void init_puzzle(Container& this_container);
+
+void set_target();
 
 int main()
 {
@@ -86,10 +104,13 @@ int main()
 	int path, ax, ay, bx, by;
 
 
-	get_user_puzzle(cont);
+	//get_user_puzzle(cont);
+	
+	set_target();
+	init_puzzle(cont);
 	
 	print(cont);
-
+	
 	while (!puzzle_solved(cont))
 	{
 		find_moves(0, cont);
@@ -102,7 +123,7 @@ int main()
 	
 	
 	
-
+	
 	
 	return 0;
 }
@@ -462,3 +483,43 @@ void move(int T, int ax, int ay, int bx, int by, Container &this_contaier)
 
 }
 
+void init_puzzle(Container& this_container)
+{
+	int initial[9] = { 1, 2, 3, 8, 0, 4, 7, 6, 5 };
+	int x, y, tile_num;
+	string status;
+
+	
+	for (int i = 0; i < NUM_TILES; i++)
+	{
+		x = i % 3;
+		y = i / 3;
+		tile_num = initial[i];
+		if (tile_num == 0)
+		{
+			status = "clear";
+		}
+		else
+		{
+			status = "on";
+		}
+		this_container.insert(status, tile_num, x, y);
+	}
+}
+
+void set_target()
+{
+	int x, y, tile_num;
+	cout << "Enter puzzle:\nFormat (x,y) = tile number" << endl;
+	for (int i = 0; i < NUM_TILES; i++)
+	{
+		x = i % 3;
+		y = i / 3;
+		cout << '(' << x << ',' << y << ") : ";
+		cin >> tile_num;
+		solved[tile_num][X] = x;
+		solved[tile_num][Y] = y;
+	}
+	cout << "DATA ACCEPTED!!!" << endl;
+
+}
