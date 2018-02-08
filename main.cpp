@@ -37,18 +37,19 @@ bx, by = next state to compare tile
 #define LEFT 2
 #define RIGHT 3
 
+
 // puzzle arrays
 // solved[TILE NUMBER][COORDINATE_VECTOR]
 int solved[NUM_TILES][XY] = {
-	{1,1}, // 0
+	{0,0}, // 0
 	{1,0}, // 1
-	{1,2}, // 2
-	{2,0}, // 3
-	{2,1},	// 4
-	{2,2}, // 5
-	{0,2},	// 6
-	{0,1},	// 7
-	{0,0}	// 8
+	{2,0}, // 2
+	{2,1}, // 3
+	{2,2},	// 4
+	{1,2}, // 5
+	{1,1},	// 6
+	{0,2},	// 7
+	{0,1}	// 8
 
 };
 
